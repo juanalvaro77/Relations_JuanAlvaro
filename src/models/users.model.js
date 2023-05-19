@@ -6,7 +6,7 @@ const Users = db.define("users", {
         type: DataTypes.STRING(30),
         //allowNull: false
     },
-    lastname: {
+    lastname: { 
         type: DataTypes.STRING(30),
         //allowNull: false
     },

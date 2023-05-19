@@ -6,7 +6,28 @@ INSERT INTO todos (title, description, user_id, category_id, created_at) VALUES
 ('Esta es la prueba Numero 2', 'Probando insercion de informacion con fecha', 2, 1, '2023-05-16 15:37:00'),
 ('Esta es la prueba Numero 3', 'Probando insercion de informacion con fecha', 2, 1, CURRENT_TIMESTAMP(0));
 
+INSERT INTO todos (title, description, user_id, category_id, created_at) VALUES 
+('Esta es una prueba 4', 'Probando insercion de informacion con un mismo usuario', 1, 1, CURRENT_TIMESTAMP(0)),
+('Esta es una prueba 5', 'Probando insercion de informacion con un mismo usuario', 1, 2, CURRENT_TIMESTAMP(0)),
+('Esta es una prueba 6', 'Probando insercion de informacion con un mismo usuario', 1, 4, CURRENT_TIMESTAMP(0)),
+('Esta es una prueba 7', 'Probando insercion de informacion con un mismo usuario', 1, 5, CURRENT_TIMESTAMP(0)),
+('Esta es una prueba 9', 'Probando insercion de informacion con un mismo usuario', 2, 1, CURRENT_TIMESTAMP(0)),
+('Esta es una prueba 10', 'Probando insercion de informacion con un mismo usuario', 2, 2, CURRENT_TIMESTAMP(0)),
+('Esta es una prueba 11', 'Probando insercion de informacion con un mismo usuario', 2, 3, CURRENT_TIMESTAMP(0)),
+('Esta es una prueba 12', 'Probando insercion de informacion con un mismo usuario', 2, 1, CURRENT_TIMESTAMP(0)),
+('Esta es una prueba 13', 'Probando insercion de informacion con un mismo usuario', 3, 1, CURRENT_TIMESTAMP(0)),
+('Esta es una prueba 14', 'Probando insercion de informacion con un mismo usuario', 3, 3, CURRENT_TIMESTAMP(0)),
+('Esta es una prueba 15', 'Probando insercion de informacion con un mismo usuario', 3, 5, CURRENT_TIMESTAMP(0));
+
+
+
 SELECT * FROM todos;
 SELECT * FROM users;
 SELECT * FROM categories;
 SELECT * FROM completeds;
+
+- un endpoint para crear usuarios
+- un endpoint para que un usuario pueda crear tareas ( Cuando un usuario crea una tarea debe seleccionarse la categoria a la que esta pertenece)  categoryId
+- un endpoint para obtener todas las tareas de un usuario incluidas sus categorias ( filtros (where), include)
+- un endpoint para que un usuario pueda cambiar el atributo completed de una tarea (false a true o viceversa ) por defecto una tarea se crea con el atributo completed false
+- un endpoint que permita eliminar tareas
