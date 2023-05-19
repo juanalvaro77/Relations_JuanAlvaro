@@ -26,6 +26,7 @@ SELECT * FROM users;
 SELECT * FROM categories;
 SELECT * FROM completeds;
 
+
 - un endpoint para crear usuarios
 - un endpoint para que un usuario pueda crear tareas ( Cuando un usuario crea una tarea debe seleccionarse la categoria a la que esta pertenece)  categoryId
 - un endpoint para obtener todas las tareas de un usuario incluidas sus categorias ( filtros (where), include)

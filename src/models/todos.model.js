@@ -8,7 +8,7 @@ const Todos = db.define("todos", {
     },
     description: {
         type: DataTypes.TEXT,
-        allowNull: false
+        
     },
     completedId: {
         type: DataTypes.INTEGER,

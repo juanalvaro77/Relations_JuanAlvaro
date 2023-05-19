@@ -22,22 +22,18 @@ const createTask = async (req, res, next)=>{
 const getTasksByUser = async (req, res)=>{
     try{
         const {userId} = req.params;
-        const todos = await Todos.findAll({
-            attributes:{
-                exclude: ["userId", "categoryId", "completedId"]
+        const todos = await Todos.findAndCountAll(
+            {
+                where: {userId}
             },
-            include: [{
-                model: Users,
-                attributes: ["id", "username"]
-            }, {
-                model: Categories,
-                attributes: ["id", "name"]
-            },{
-                model: Completeds,
-                    attributes: ["id", "completed"]
-                
-            }]
-        }, {where: {userId: userId}});
+            {
+                attributes:{exclude: ["userId","categoryId", "completedId"]},
+                include: [
+                            {model: Users, attributes: ["id", "username"]},
+                            {model: Categories, attributes: ["id", "name"]},
+                            {model: Completeds, attributes: ["id", "completed"]}
+                        ]
+            });
         res.json(todos);
         
     } catch(error){
@@ -85,9 +81,9 @@ const deleteTask = async (req, res, next)=>{
 /*Obtener TODAS las tareas*/
 const getAllTasks = async (req, res, next)=>{
     try{
-        const todos = await Todos.findAll({
+        const todos = await Todos.findAndCountAll({
             attributes:{
-                exclude: ["userId", "categoryId", "completedId"]
+                exclude: ["userId","categoryId", "completedId"]
             },
             include: [{
                 model: Users,
