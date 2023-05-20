@@ -24,7 +24,7 @@ const Users = db.define("users", {
         }
     },
     password: {
-        type: DataTypes.STRING(30),
+        type: DataTypes.TEXT,
         allowNull: false
     },
   

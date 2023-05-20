@@ -1,4 +1,5 @@
 const Users = require("../models/users.model");
+const bcrypt = require("bcrypt");
 
 /*1. un endpoint para crear usuarios*/
 
@@ -23,7 +24,10 @@ const createUser = async (req, res) => {
                 message: "password most be just a string"
             })
         }
-        await Users.create({username, email, password});
+
+        const hashed = await bcrypt.hash(password,10);
+
+        await Users.create({username, email, password: hashed});
         res.status(201).send();
       
         
@@ -32,8 +36,35 @@ const createUser = async (req, res) => {
     }
 }
 
+//Ver todos los usuarios
+const getAllUsers = async (req, res, next)=>{
+    try{
+        const users = await Users.findAndCountAll();
+        res.json(users);
+    } catch(error){
+        res.status(400).json(error);
+    }
+
+}
+
+//Eliminar un usuario
+const deleteUser = async (req, res, next)=>{
+    try{
+        const {id} = req.params;
+        await Users.destroy({where:{id: id,}});
+        res.send(204).send();
+        
+    } catch(error){
+        res.sendStatus(400);
+    }
+
+}
+
+
 
 
 module.exports = {
-    createUser
+    createUser,
+    getAllUsers,
+    deleteUser
 }
