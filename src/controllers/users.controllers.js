@@ -1,5 +1,6 @@
 const Users = require("../models/users.model");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 /*1. un endpoint para crear usuarios*/
 
@@ -60,11 +61,49 @@ const deleteUser = async (req, res, next)=>{
 
 }
 
+//Login
+const userLogin = async (req,res) => {
+    try {
+        const {email, password} = req.body;
+        const user = await Users.findOne({
+            where:{email}
+        })
+        if(!user) {
+            return res.status(400).json(
+                {
+                    error: "Invalid email",
+                    message: "email not exist"
+                }
+            )
+        }
+        const validPassword = await bcrypt.compare(password, user.password);
+
+        if(!validPassword){
+            return res.status(400).json({
+                message: "Don`t can continue"
+            });
+        }
+
+        const {firstname, lastname, username, id} = user;
+        const userData = {firstname, lastname, username, id, email};
+        const token = await jwt.sign(userData, "Arbelaez", {algorithm: "HS512", expiresIn: "5m"});
+
+        userData.token = token;
+
+
+        //res.json({firstname, lastname, username, id, email}); 
+        res.json(userData); 
+    } catch (error) {
+        res.status(400).json(error);
+        
+    }
+}
 
 
 
 module.exports = {
     createUser,
     getAllUsers,
-    deleteUser
+    deleteUser,
+    userLogin
 }

@@ -72,7 +72,7 @@ const deleteTask = async (req, res, next)=>{
         res.send(204).send();
         //console.log(todos);    
     } catch(error){
-        res.status(400);
+                res.sendStatus(400);
     }
 
 }
